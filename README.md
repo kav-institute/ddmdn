@@ -22,6 +22,7 @@ _**Abstract**_ --  Human Trajectory Forecasting (HTF) aims to predict future hum
     }
 
 ![til](./images/collage_1.gif)
+![til](./images/collage_2.gif)
 
 _**Architecture**_ -- DD-MDN is an end-to-end framework that consists of three parts (Encoding, Probabilistic Modeling, and Deterministic Hypotheses Generation). An architectural overview is illustrated by the figure above. Classic encoder networks provide input data encoding; LSTM is used for temporal inputs (past agent motions); CNN is used for spatial data (map information); and transformers are used for self- and social-attention matters. Probabilistic modeling processes temporal and spatial input features and is achieved by a dual MDN, consisting of a shared denoising diffusion backbone and three probabilistic heads that derive two types of distributional representations: a per-timestep and a per-anchor-trajectory representation. The architecture can handle various continuous probability distributions, including Gaussian, Laplace, Cauchy, and others. For this work, we use Gaussians Mixtures (GM). The per-timestep representation is necessary for trustworthy uncertainty modeling and calibration. The future state distribution at each time is represented by a multimodal GM. The per-anchor-trajectory representation is necessary for natural and realistic discrete hypotheses generation, delivering full time-stable and individually weighted M future trajectory distributions in a trajectory spce. The individual core parameters mean and variances are shared between both representations; however, their arrangement differs per representation. The weights are separated. Deterministic modeling processes temporal and social input features, to generate K uncertainty-related discrete future trajectory hypotheses using affine reparameterization sampling. A detailed description of the architecture is provided in the full paper.
 
@@ -242,7 +243,7 @@ To run an model evaluation you can use the following command. All relevant infor
 ```bash
 # Start an evaluation using ETH benchmark dataset with default config:
 
-cd ../frameworks/ddmdn
+cd ../framework/ddmdn
 python3 test.py --cfg=benchmarks/eth_benchmark.json --gpu=0 --print --bar
 
 # Arguments:
@@ -260,7 +261,7 @@ To run a training you can use the following command. All relevant information ar
 ```bash
 # Start a training using ETH benchmark dataset with default config:
 
-cd ../frameworks/ddmdn
+cd ../framework/ddmdn
 python3 train.py --cfg=benchmarks/eth_benchmark.json --gpu=0 --print --bar
 
 # Arguments:
