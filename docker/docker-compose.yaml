@@ -1,0 +1,30 @@
+services:
+  ddmdn_framework:
+    build: .
+    image: kavlabor15/ddmdn:1.0
+    container_name: ddmdn_framework_dev
+    shm_size: 32G
+    restart: unless-stopped
+    privileged: true
+    environment:
+      - DISPLAY=${DISPLAY}
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all
+      - HOME=/workspace
+    ports:
+      - "${SSH_PORT}:22"
+      - "${TENSORBOARD_PORT}:6006"
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ${DATA_PATH}:/workspace/data
+      - ${REPOS_PATH}:/workspace/repos
+    entrypoint: /workspace/entrypoint.sh
+    working_dir: /workspace/repos
+    user: 1000:1000
+    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]

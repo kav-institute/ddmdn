@@ -1,0 +1,6 @@
+.hypothesis
+.vscode
+__pycache__
+*.log
+*.logs
+*_terminate_parallel.sh

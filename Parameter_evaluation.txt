@@ -1,0 +1,39 @@
+Temporal input encoder (LSTM):
+
+"temporal_encoder_num_layers": 1 <- [1,2,3,4]
+"temporal_encoder_out_dim": 64 <- [16,32,64,128]
+"temporal_encoder_attn_nheads": 2 <- [2,4,6,8]
+"temporal_encoder_attn_layer_size": 2 <- [2,4]
+
+
+Spatial input encoder(CNN):
+
+"cnn_encoder_out_dim": 64 <- [64,128,256]
+"cnn_encoder_layer_size": 1 <- [1,2]
+"cnn_encoder_nheads": 2 <- [2,4,6,8]
+
+
+Social input encoder (TF):
+
+"social_encoder_in_dim": 64 <- [16,32,64,128]
+"social_encoder_model_dim": 64 <- [16,32,64,128]
+"social_encoder_ff_dim": 128 <- [32,64,128,256]
+"social_encoder_head_size": 2 <- [2,4,6,8]
+"social_encoder_layer_size": 2 <- [2,4]
+
+
+Diffusion MDN Backbone:
+
+"mdn_diffusion_steps": 96 <- [64,96,128]
+"mdn_diffusion_layer_size": 2 <- [2,4]
+"mdn_diffusion_nheads": 2 <- [2,4,6,8]
+"mdn_diffusion_d_model": 32 <- [32,64,128]
+"mdn_diffusion_ff_dim": 64 <- [64,128,256]
+"mdn_diffusion_sampling_steps": 8 <- [4,8,12]
+
+
+Discrete Hypotheses Generator:
+
+"discrete_generator_decoder_var_hidden_dim": [512,384] <- [[384,256], [512,384], [768,512]]
+"discrete_generator_encoder_scale_hidden_dim": [4,16], <- [[2,8], [4,16], [8,32]]
+"discrete_generator_scale_out_dim": 32 <- [16,32,64]
