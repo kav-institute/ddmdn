@@ -1,7 +1,7 @@
 services:
   ddmdn_framework:
     build: .
-    image: kavlabor15/ddmdn:1.0
+    image: asterix19/ddmdn:1.0
     container_name: ddmdn_framework_dev
     shm_size: 32G
     restart: unless-stopped
