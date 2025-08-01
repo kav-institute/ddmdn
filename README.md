@@ -51,13 +51,16 @@ docker pull asterix19/ddmdn:1.0
 --> [Download DDMDN Data](https://drive.google.com/drive/folders/1CVIPTMtpfind3CArV0yvZ_zT_UHOWoTN?usp=sharing)
 
 ```bash
+# Create a workspace folder on your local machine
+mkdir .../ddmdn_workspace/
+
 # Extract "benchmarks", "full" and "trained_models" directories to:
-.../ddmdn/datasets/
+.../ddmdn_workspace/datasets/
 
 # Result:
-.../ddmdn/datasets/benchmarks
-.../ddmdn/datasets/full
-.../ddmdn/datasets/trained_models
+.../ddmdn_workspace/datasets/benchmarks
+.../ddmdn_workspace/datasets/full
+.../ddmdn_workspace/datasets/trained_models
 ```
 
 **3.) Clone repository:**
@@ -65,31 +68,43 @@ docker pull asterix19/ddmdn:1.0
 Download from: https://anonymous.4open.science/r/ddmdn-45F6
 
 # Extract repository to:
-.../ddmdn/repos/
+.../ddmdn_workspace/repos/
 
 # Result:
-.../ddmdn/repos/ddmdn
+.../ddmdn_workspace/repos/ddmdn
 ```
 
 **4.) Set paths and user id in user.env:**
 ```bash
 # User.env file path:
-cd .../ddmdn/datasets/ddmdn/docker
+cd .../ddmdn_workspace/repos/ddmdn/docker
 
 # Define:
 USER_ID=...
-DATA_PATH='/.../ddmdn/datasets/'            ---> Is mapped in the container to: /workspace/data
-REPOS_PATH='/.../ddmdn/repos/ddmdn'      ---> Is mapped in the container to: /workspace/repos
+DATA_PATH='/.../ddmdn_workspace/datasets/'            ---> Is mapped in the container to: /workspace/data
+REPOS_PATH='/.../ddmdn_workspace/repos/ddmdn'      ---> Is mapped in the container to: /workspace/repos
 ```
 
 **5.) Start the container:**
 ```bash
-cd .../ddmdn/repos/ddmdn/docker
+cd .../ddmdn_workspace/repos/ddmdn/docker
 docker compose --env-file user.env build up -d
 ```
 
 **6.) Connect to the container:**
 Connect with your preferred IDE or via terminal to the docker container and your ready to go. To run an evaluation or training see [Training](#training) and [Evaluation](#evaluation) sections below.
+
+```bash
+#--- ETH pretrained model test ---#
+# Attach to container
+docker exec -it ddmdn_framework_dev bash
+
+# Switch to test script directory
+cd /workspace/repos/framework/ddmdn
+
+# Run ETH evaluation of pretrained model
+python3 test.py --cfg=benchmarks/hotel_benchmark.json --gpu=0 --print --bar 
+```
 
 
 ---

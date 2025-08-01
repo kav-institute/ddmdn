@@ -7,8 +7,8 @@ REPOS_PATH='/<YOUR_PATH_TO_THE_REPOSITORY>' ---> Is mapped in the container to: 
 DATA_PATH='/<YOUR_PATH_TO_THE_DATA>' ---> Is mapped in the container to: /workspace/data
 
 # Example:
-REPOS_PATH='/mnt/user123/ddmdn/data' # in which the preprocessed data and pretrained trained_models are located
-DATA_PATH='/mnt/user123/ddmdn/repos' # in which the ddmdn github repository is cloned to
+REPOS_PATH='/mnt/user123/ddmdn_workspace/datasets' # in which the preprocessed data and pretrained trained_models are located
+DATA_PATH='/mnt/user123/ddmdn_workspace/repos/ddmdn' # in which the ddmdn github repository is cloned to
 ```
 
 ```bash

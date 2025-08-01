@@ -109,7 +109,7 @@ def test(cfg, annealing_status, test_loader, mesh_grid, model, per_step_visualiz
             )
             
             Forecast_Data.build_gt_confidence_set()
-            #Forecast_Data.build_mesh_confidence_set()
+            Forecast_Data.build_mesh_confidence_set()
             Test_Forecast_Storage.add_batch_data(batch_data=Forecast_Data.get_data())
             
             # Accumulate loss
