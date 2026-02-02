@@ -6,25 +6,27 @@
 #### This is the official implementation for: 
 
 _**Diffusion-Based Trustworthy Human Trajectory Prediction with Dual Mixture Density Networks and Uncertainty Self-Calibration**_
-Paper: tba <!-- [[arXiv]()] [[ResearchGate]()] -->
+Paper: [![IEEE Badge](https://img.shields.io/badge/IEEE-00629B?logo=ieee&logoColor=fff&style=for-the-badge)](https://doi.org) [![arXiv Badge](https://img.shields.io/badge/arXiv-B31B1B?logo=arxiv&logoColor=fff&style=flat)](https://arxiv.org) [![ResearchGate Badge](https://img.shields.io/badge/ResearchGate-0CB?logo=researchgate&logoColor=fff&style=flat)](https://www.researchgate.net)
 
-_**Abstract**_ --  Human Trajectory Forecasting (HTF) aims to predict future human movements from past trajectories and environmental context, with applications in Autonomous Driving (AD), Smart Surveillance, and Human-Machine Interaction. While prior work emphasizes forecasting accuracy, social interaction handling, and hypotheses diversity, no assessment is made of the correctness of distribution uncertainty and calibration. Furthermore, the accuracy of forecasts at short observation periods is often not evaluated. However, downstream tasks, such as AD path planning and robotic collision avoidance, rely on fast, trustworthy, and calibrated forecasts with meaningful uncertainty estimates. We introduce an end-to-end probabilistic HTF model (DD-MDN) that unifies positional accuracy and reliable uncertainty handling. Built on a few‑shot denoising diffusion backbone, a dual Mixture Density Network generates self-calibrated future residence areas with probability‑ranked anchor paths, from which diverse discrete trajectory hypotheses are derived. This formulation ensures self‑calibrated uncertainty, multimodality, and accurate probability assignments, all learned directly from data without predefined anchors or endpoints. Experiments with the ETH/UCY, SDD, inD, and IMPTC datasets demonstrate new state-of-the-art positional accuracy and robustness against short observation periods, enhanced by reliable and calibrated uncertainty modeling.
+**ICRA 2026 Paper**
+
+_**Abstract**_ --  Human Trajectory Forecasting (HTF) aims to predict future human movements from past trajectories and environmental context, with applications in Autonomous Driving (AD), Smart Surveillance, and Human-Machine Interaction. While prior work emphasizes forecasting accuracy, social interaction handling, and hypothesis diversity, no assessment is made of the correctness of distribution uncertainty and calibration. Furthermore, the accuracy of forecasts at short observation periods is often not evaluated. However, downstream tasks, such as AD path planning and robotic collision avoidance, require fast, reliable, and calibrated forecasts with meaningful uncertainty estimates. We introduce an end-to-end probabilistic HTF model (DD-MDN) that unifies positional accuracy and reliable uncertainty handling. Built on a few‑shot denoising diffusion backbone, a dual Mixture Density Network generates self-calibrated future residence areas with probability‑ranked anchor paths, from which diverse discrete trajectory hypotheses are derived. This formulation ensures self‑calibrated uncertainty, multimodality, and accurate probability assignments, all learned directly from data without predefined anchors or endpoints. Experiments on the ETH/UCY, SDD, inD, and IMPTC datasets demonstrate state-of-the-art positional accuracy and robustness under short observation periods, enabled by reliable, calibrated uncertainty modeling.
 
 **Cite:**
 
-    @article{ddmdn_2025,
+    @article{ddmdn_2026,
         title={Diffusion-Based Trustworthy Human Trajectory Prediction with Dual Mixture Density Networks and Uncertainty Self-Calibration},
-        author={},
-        journal={},
-        year={2025},
-        organization={},
-        doi={}
+        author={Hetzel, M. and Turcan, K. and Reichert, H. and Doll, K. and Sick, B.},
+        journal={IEEE International Conference on Robotics and Automation (ICRA)},
+        year={2026},
+        organization={IEEE Robotics and Automation Society},
+        doi={tba}
     }
 
 ![til](./images/collage_1.gif)
 ![til](./images/collage_2.gif)
 
-_**Architecture**_ -- DD-MDN is an end-to-end framework that consists of three parts (Encoding, Probabilistic Modeling, and Deterministic Hypotheses Generation). An architectural overview is illustrated by the figure above. Classic encoder networks provide input data encoding; LSTM is used for temporal inputs (past agent motions); CNN is used for spatial data (map information); and transformers are used for self- and social-attention matters. Probabilistic modeling processes temporal and spatial input features and is achieved by a dual MDN, consisting of a shared denoising diffusion backbone and three probabilistic heads that derive two types of distributional representations: a per-timestep and a per-anchor-trajectory representation. The architecture can handle various continuous probability distributions, including Gaussian, Laplace, Cauchy, and others. For this work, we use Gaussians Mixtures (GM). The per-timestep representation is necessary for trustworthy uncertainty modeling and calibration. The future state distribution at each time is represented by a multimodal GM. The per-anchor-trajectory representation is necessary for natural and realistic discrete hypotheses generation, delivering full time-stable and individually weighted M future trajectory distributions in a trajectory spce. The individual core parameters mean and variances are shared between both representations; however, their arrangement differs per representation. The weights are separated. Deterministic modeling processes temporal and social input features, to generate K uncertainty-related discrete future trajectory hypotheses using affine reparameterization sampling. A detailed description of the architecture is provided in the full paper.
+_**Architecture**_ -- DD-MDN is an end-to-end framework that consists of three parts (Encoding, Probabilistic Modeling, and Deterministic Hypotheses Generation). An architectural overview is illustrated by the figure above. Classic encoder networks encode input data; LSTMs are used for temporal inputs (past agent motion); CNNs are used for spatial data (map information); and transformers are used for self- and social-attention tasks. Probabilistic modeling processes temporal and spatial input features and is achieved by a dual MDN, consisting of a shared denoising diffusion backbone and three probabilistic heads that derive two types of distributional representations: a per-timestep and a per-anchor-trajectory representation. The architecture can handle various continuous probability distributions, including Gaussian, Laplace, Cauchy, and others. For this work, we use Gaussian Mixtures (GM). The per-timestep representation is necessary for trustworthy uncertainty modeling and calibration. The future-state distribution at each time point is represented by a multimodal GM. The per-anchor-trajectory representation is necessary for natural and realistic discrete hypothesis generation, yielding fully time-stable, individually weighted M future trajectory distributions in trajectory space. The individual core parameters' means and variances are shared across the two representations; however, their arrangements differ between them. The weights are separated. Deterministic modeling processes temporal and social input features to generate K uncertainty-related discrete future-trajectory hypotheses via affine reparameterization sampling. A detailed description of the architecture is provided in the full paper.
 
 !["Screenshot..."](images/ddmdn_arch.png "Screenshot...")
 
@@ -55,7 +57,7 @@ docker pull asterix19/ddmdn:1.0
 # Create a workspace folder on your local machine
 mkdir .../ddmdn_workspace/
 
-# Extract "benchmarks", "full" and "trained_models" directories to:
+# Extract "benchmarks", "full", and "trained_models" directories to:
 .../ddmdn_workspace/datasets/
 
 # Result:
@@ -93,7 +95,7 @@ docker compose --env-file user.env build up -d
 ```
 
 **6.) Connect to the container:**
-Connect with your preferred IDE or via terminal to the docker container and your ready to go. To run an evaluation or training see [Training](#training) and [Evaluation](#evaluation) sections below.
+Connect with your preferred IDE or via terminal to the Docker container, and you're ready to go. To run an evaluation or training, see [Training](#training) and [Evaluation](#evaluation) sections below.
 
 ```bash
 #--- ETH pretrained model test ---#
@@ -112,7 +114,7 @@ python3 test.py --cfg=benchmarks/hotel_benchmark.json --gpu=0 --print --bar
 <a name="requirements"></a>
 ### Requirements
 
-The framework uses the following system configuration. All specific python requirements can be found in the corresponding requirements.txt file and are already pre-installed in the provided docker container.
+The framework uses the following system configuration. All specific Python requirements are listed in the corresponding requirements.txt file and are already pre-installed in the provided Docker container.
 
 ```
 # Software
@@ -129,10 +131,10 @@ RTX 4090
 ```
 
 ### Docker
-**From scratch:** We used and recommend the Nvidia NGC Pytorch 24.10 image. Run the image and install the corresponding python requirements.txt and your ready to go.
+**From scratch:** We used and recommend the Nvidia NGC Pytorch 24.10 image. Run the image and install the corresponding Python requirements.txt, and you're ready to go.
 - [[Nvidia NGC Pytorch 24.10]](https://docs.nvidia.com/deeplearning/frameworks/pytorch-release-notes/rel-24-10.html) [[Nvidia NGC Pytorch Release Notes]](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch)
 
-**Prebuild:** Simply pull our prebuild docker image from docker hub, attach your prefered IDE (we use Visual Studio Code) and your ready to go.:
+**Prebuild:** Simply pull our prebuild Docker image from Docker Hub, attach your preferred IDE (we use Visual Studio Code), and you're ready to go.
 
 - [[DDMDN Official Docker Image]](https://hub.docker.com/r/asterix19/ddmdn)
 ```bash
@@ -142,7 +144,7 @@ docker pull asterix19/ddmdn:1.0
 ---
 <a name="datasets"></a>
 ### Datasets
-We use pedestrian trajectory data from multiple popular road traffic and survaillance datasets. 
+We use pedestrian trajectory data from multiple popular road traffic and surveillance datasets. 
 
 #### Raw Data:
 Below we list the publications and raw data sources:
@@ -161,16 +163,16 @@ Below we list the publications and raw data sources:
 
 #### Preprocessed Data: 
 Already preprocessed datasets can loaded from here: [[Download Preprocessed Datasets]](https://drive.google.com/drive/folders/1CVIPTMtpfind3CArV0yvZ_zT_UHOWoTN?usp=sharing)
-(Due to copyright, we cannot provide data from the inD dataset directly, reach out to the authors for access.)
+(Due to copyright, we cannot provide data from the inD dataset directly; reach out to the authors for access.)
 
 #### Dataset Preprocessing Scripts:
-To self preprocess the raw data we also provide dataset preprocessing scripts in the code repository under:
+To self-preprocess the raw data, we also provide dataset preprocessing scripts in the code repository under:
 ```bash
 ../framework/datasets/
 ``` 
 
 #### Final Data Structure: 
-The final data structure looks like this. Extract and move the dataset data, pretrained model weights and code repository to this structure.
+The final data structure is as follows. Extract and move the dataset, pretrained model weights, and code repository to this structure.
 ```bash
 ../ddmdn/
         ├── repos
@@ -238,10 +240,10 @@ Pretrained models can loaded from here: [[Download Pretrained Models]](https://d
 ---
 <a name="evaluation"></a>
 ### Model Evaluation
-To run an model evaluation you can use the following command. All relevant information are provided by the configuration .json file. It contains all necessary paths, parameters and configurations for training and evaluation. For every dataset type one can create unlimited different configuration files. After a training the configuration file is copied and stored in the result directory next to the checkpoints. The test script directly refers to this config file!
-**Keep in Mind:** Within the config file the dataset paths must match to the correct data locations!
+To run a model evaluation, you can use the following command. All relevant information is provided in the configuration .json file. It contains all necessary paths, parameters, and configurations for training and evaluation. For every dataset type, one can create an unlimited number of different configuration files. After training, the configuration file is copied to the results directory alongside the checkpoints. The test script explicitly references this configuration file.
+**Keep in Mind:** Within the config file, the dataset paths must match the correct data locations!
 ```bash
-# Start an evaluation using ETH benchmark dataset with default config:
+# Start an evaluation using the ETH benchmark dataset with the default config:
 
 cd ../framework/ddmdn
 python3 test.py --cfg=benchmarks/eth_benchmark.json --gpu=0 --print --bar
@@ -249,17 +251,17 @@ python3 test.py --cfg=benchmarks/eth_benchmark.json --gpu=0 --print --bar
 # Arguments:
 --cfg: target dataset specific config in configs-directory
 --gpu: gpu id to be used for the evaluation
---bar: Show evaluation progress as progress bar
+--bar: Show evaluation progress as a progress bar
 --print: Show evaluation feedback information in console
 ```
 
 ---
 <a name="training"></a>
 ### Model Training
-To run a training you can use the following command. All relevant information are provided by the configuration .json file. It contains all necessary paths, parameters and configurations for training and evaluation. For every dataset type one can create unlimited different configuration files.
-**Keep in Mind:** Within the config file the dataset paths must match to the correct data locations and the checkpoint name!
+To run a training session, use the following command. All relevant information is provided in the configuration .json file. It contains all necessary paths, parameters, and configurations for training and evaluation. For every dataset type, one can create an unlimited number of different configuration files.
+**Keep in Mind:** Within the config file, the dataset paths must match the correct data locations and the checkpoint name!
 ```bash
-# Start a training using ETH benchmark dataset with default config:
+# Start a training using the ETH benchmark dataset with the default config:
 
 cd ../framework/ddmdn
 python3 train.py --cfg=benchmarks/eth_benchmark.json --gpu=0 --print --bar
@@ -267,7 +269,7 @@ python3 train.py --cfg=benchmarks/eth_benchmark.json --gpu=0 --print --bar
 # Arguments:
 --cfg: target dataset specific config in configs-directory
 --gpu: gpu id to be used for the training
---bar: Show training progress as progress bar
+--bar: Show training progress as a progress bar
 --print: Show training feedback information in console
 ```
 
