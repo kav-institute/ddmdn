@@ -276,3 +276,13 @@ python3 train.py --cfg=benchmarks/eth_benchmark.json --gpu=0 --print --bar
 <a name="license"></a>
 ## License:
 This project is licensed under the Apache 2.0 License - see the [LICENSE](LICENSE) file for details
+
+## Contributors
+<a href="https://github.com/kav-institute/ddmdn/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=kav-institute/ddmdn" />
+</a>
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=kav-institute/ddmdn&type=date&legend=top-left)](https://www.star-history.com/#kav-institute/ddmdn&type=date&legend=top-left)
+
